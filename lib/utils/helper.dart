@@ -16,8 +16,15 @@ class _Function {
     );
   }
 
-  push(BuildContext context, Widget route) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => route));
+  showLoading(BuildContext context) {
+    WidgetsBinding.instance?.addPostFrameCallback((val) {
+      showDialog(
+        context: context,
+        builder: (context) => Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    });
   }
 
   MaterialColor createMaterialColor(Color color) {

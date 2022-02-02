@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:github_app/base/base.dart';
+import 'package:github_app/models/pokemon.dart';
 import 'package:github_app/ui/pokemon_detail/pokemon_detail_page.dart';
 import 'package:github_app/ui/views/touch_opacity.dart';
 
@@ -9,9 +10,11 @@ class PokemonItemView extends StatelessWidget {
   const PokemonItemView({
     Key? key,
     this.onDelete,
+    required this.item,
   }) : super(key: key);
 
   final VoidCallback? onDelete;
+  final Pokemon item;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +40,11 @@ class PokemonItemView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "Bulbasaur",
+                item.name ?? "",
                 style: T.text.h2,
               ),
               Image.network(
-                C.string.dummyPoke,
+                C.string.imagePokemonUrl(item.id ?? ""),
                 alignment: Alignment.centerRight,
                 width: 80,
                 height: 80,

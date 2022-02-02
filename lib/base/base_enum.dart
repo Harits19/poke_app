@@ -1,6 +1,7 @@
 part of 'base.dart';
 
-enum UserRole {
-  student,
-  tentor,
+enum BaseState {
+  loading,
+  error,
+  success,
 }

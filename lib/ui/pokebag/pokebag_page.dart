@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_app/base/base.dart';
+import 'package:github_app/models/pokemon.dart';
 import 'package:github_app/ui/views/header_title_view.dart';
 import 'package:github_app/ui/views/header_view.dart';
 import 'package:github_app/ui/views/pokemon_item_view.dart';
@@ -21,6 +22,7 @@ class PokebagPage extends StatelessWidget {
             ...List.generate(
               10,
               (index) => PokemonItemView(
+                item: Pokemon(),
                 onDelete: () {},
               ),
             )

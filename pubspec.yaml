@@ -34,10 +34,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  get: ^4.6.1
   get_it: ^7.2.0
   hive_flutter: ^1.1.0
+  infinite_scroll_pagination: ^3.1.0
   pretty_dio_logger: ^1.1.1
-  get: ^4.6.1
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -66,7 +67,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-
   # {
   # FontWeight.w100: 'Thin',
   # FontWeight.w200: 'ExtraLight',
@@ -99,7 +99,6 @@ flutter:
   #         weight: 800
   #       - asset: fonts/Poppins-Black.ttf
   #         weight: 900
-
   # fonts:
   #   - family: Schyler
   #     fonts:

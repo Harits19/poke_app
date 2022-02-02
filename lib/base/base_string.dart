@@ -28,6 +28,9 @@ class _String {
   String get pokeball =>
       "https://upload.wikimedia.org/wikipedia/commons/4/4c/Pokeball.png";
 
+  String imagePokemonUrl(String id) =>
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png";
+
   List<String> get listJenjang => [
         // TODO move to database
         "TK",
