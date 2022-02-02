@@ -22,6 +22,12 @@ class _Image {
 class _String {
   const _String();
 
+  String get dummyPoke =>
+      "https://upload.wikimedia.org/wikipedia/id/2/2f/1bulbasaur.png";
+
+  String get pokeball =>
+      "https://upload.wikimedia.org/wikipedia/commons/4/4c/Pokeball.png";
+
   List<String> get listJenjang => [
         // TODO move to database
         "TK",

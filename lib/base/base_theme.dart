@@ -47,16 +47,23 @@ class _Button {
       );
 
   ButtonStyle get elevatedStyle => ButtonStyle(
-      backgroundColor: T.button.backgroundColor,
-      minimumSize: T.button.minimumSize,
-      shape: T.button.outlineBorder,
-      foregroundColor: foregroundColor,
-      textStyle: MaterialStateProperty.all<TextStyle>(T.text.notoStyle));
+        backgroundColor: T.button.backgroundColor,
+        minimumSize: T.button.minimumSize,
+        shape: T.button.outlineBorder,
+        foregroundColor: foregroundColor,
+        // textStyle: MaterialStateProperty.all<TextStyle>(T.text.h1),
+      );
 }
 
 class _Text {
   const _Text();
-  TextStyle get notoStyle => TextStyle();
+  TextStyle get h1 => TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.w900,
+      );
+  TextStyle get h2 => TextStyle(
+        fontSize: 24,
+      );
 }
 
 class _Decoration {
