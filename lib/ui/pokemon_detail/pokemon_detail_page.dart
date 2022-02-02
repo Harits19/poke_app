@@ -17,7 +17,7 @@ class PokemonDetailPage extends StatelessWidget {
             ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                const HeaderView(
+                HeaderView(
                   useHome: true,
                   usePokebag: true,
                 ),
