@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:github_app/base/base.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiConfig {
