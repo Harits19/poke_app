@@ -20,13 +20,4 @@ class ApiConfig {
         maxWidth: 90));
     return dioInstance;
   }
-
-  static Map<String, dynamic> toParameter(
-    int page,
-  ) {
-    return {
-      "page[number]": page,
-      "page[size]": C.num.pageSize,
-    };
-  }
 }

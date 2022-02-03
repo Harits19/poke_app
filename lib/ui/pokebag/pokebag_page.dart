@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:github_app/base/base.dart';
-import 'package:github_app/models/pokemon.dart';
+import 'package:get/get.dart';
+import 'package:github_app/getx/pokemon_controller.dart';
 import 'package:github_app/ui/views/header_title_view.dart';
-import 'package:github_app/ui/views/header_view.dart';
 import 'package:github_app/ui/views/pokemon_item_view.dart';
 
 class PokebagPage extends StatelessWidget {
@@ -12,21 +11,28 @@ class PokebagPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.all(16),
-          children: [
-            HeaderTitleView(
-              title: "Pokebag",
-              useHome: true,
-            ),
-            ...List.generate(
-              10,
-              (index) => PokemonItemView(
-                item: Pokemon(),
-                onDelete: () {},
-              ),
-            )
-          ],
+        child: GetBuilder<PokemonController>(
+          builder: (controller) {
+            final listPokebag = controller.listPokebag;
+            return ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                const HeaderTitleView(
+                  title: "Pokebag",
+                  useHome: true,
+                ),
+                ...List.generate(
+                  listPokebag.length,
+                  (index) => PokemonItemView(
+                    item: listPokebag[index],
+                    onDelete: () {
+                      controller.releasePokemon(index: index);
+                    },
+                  ),
+                )
+              ],
+            );
+          },
         ),
       ),
     );

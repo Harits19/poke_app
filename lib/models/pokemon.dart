@@ -1,7 +1,10 @@
+part 'pokemon_detail.dart';
+
 class Pokemon {
   String? id;
   String? name;
   String? url;
+  PokemonDetail? pokemonDetail;
 
   Pokemon({
     this.name,

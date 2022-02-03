@@ -20,7 +20,9 @@ class PokemonItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return TouchOpacity(
       onTap: () {
-        Get.to(() => const PokemonDetailPage());
+        Get.to(() => PokemonDetailPage(
+              index: int.parse(item.id ?? "0") - 1,
+            ));
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
@@ -51,13 +53,15 @@ class PokemonItemView extends StatelessWidget {
               ),
               if (onDelete != null)
                 Align(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(
-                    CupertinoIcons.delete,
-                    color: Colors.grey,
-                    size: 32,
-                  ),
-                )
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      icon: const Icon(
+                        CupertinoIcons.delete,
+                        color: Colors.grey,
+                        size: 32,
+                      ),
+                      onPressed: onDelete,
+                    ))
             ],
           ),
         ),

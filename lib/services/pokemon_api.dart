@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:github_app/models/api_response.dart';
@@ -33,7 +31,22 @@ class PokemonApi {
     }
   }
 
-  getTypePokemon({
+  getDetailPokemon({
     required String name,
-  }) {}
+    required ValueChanged<PokemonDetail> onSuccess,
+    required ValueChanged<String> onError,
+  }) async {
+    try {
+      final response = await _dio.get(
+        "/pokemon/$name",
+      );
+      final responseParsed = PokemonDetail.fromJson(response.data);
+
+      onSuccess(responseParsed);
+    } on DioError catch (e) {
+      onError(e.message);
+    } on Exception catch (e) {
+      onError(e.toString());
+    }
+  }
 }

@@ -27,7 +27,7 @@ class HeaderTitleView extends StatelessWidget {
           title,
           style: T.text.h1,
         ),
-        Gap.verti(16)
+        const Gap.verti(16)
       ],
     );
   }

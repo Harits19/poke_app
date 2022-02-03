@@ -35,18 +35,18 @@ class HeaderView extends StatelessWidget {
             if (useHome)
               InkWell(
                 onTap: () {
-                  Get.offAll(() => PokemonPage());
+                  Get.offAll(() => const PokemonPage());
                 },
                 child: Text(
                   "Home",
                   style: T.text.h2,
                 ),
               ),
-            Spacer(),
+            const Spacer(),
             if (usePokebag)
               InkWell(
                 onTap: () {
-                  Get.to(() => PokebagPage());
+                  Get.to(() => const PokebagPage());
                 },
                 child: Text(
                   "Pokebag",
@@ -55,7 +55,7 @@ class HeaderView extends StatelessWidget {
               )
           ],
         ),
-        Gap.verti(32),
+        const Gap.verti(32),
       ],
     );
   }
