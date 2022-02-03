@@ -24,7 +24,8 @@ class PokebagPage extends StatelessWidget {
                 ...List.generate(
                   listPokebag.length,
                   (index) => PokemonItemView(
-                    item: listPokebag[index],
+                    item: listPokebag[index].pokemon,
+                    username: listPokebag[index].username,
                     onDelete: () {
                       controller.releasePokemon(index: index);
                     },

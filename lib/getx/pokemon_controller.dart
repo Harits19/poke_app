@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:github_app/models/pokebag.dart';
 import 'package:github_app/models/pokemon.dart';
 import 'package:github_app/services/pokemon_api.dart';
 
 class PokemonController extends GetxController {
   List<Pokemon> listPokemon = <Pokemon>[];
-  List<Pokemon> listPokebag = [];
+  List<Pokebag> listPokebag = [];
   bool successCatch = true;
 
   int page = 0;
@@ -42,14 +43,11 @@ class PokemonController extends GetxController {
   }
 
   catchPokemon({
-    required Pokemon pokemon,
+    required Function() onSuccess,
     required Function(String) onError,
   }) {
     if (successCatch) {
-      listPokebag.removeWhere(
-        (element) => element.name == pokemon.name,
-      );
-      listPokebag.add(pokemon);
+      onSuccess();
     } else {
       onError("Gagal menangkap pokemon");
     }
@@ -62,5 +60,9 @@ class PokemonController extends GetxController {
   }) {
     listPokebag.removeAt(index);
     update();
+  }
+
+  addPokemon({required Pokebag pokebag}) {
+    listPokebag.add(pokebag);
   }
 }

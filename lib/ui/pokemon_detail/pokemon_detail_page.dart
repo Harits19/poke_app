@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:github_app/base/base.dart';
 import 'package:github_app/getx/pokemon_controller.dart';
+import 'package:github_app/getx/theme_controller.dart';
+import 'package:github_app/models/pokebag.dart';
+import 'package:github_app/models/pokemon.dart';
 import 'package:github_app/ui/pokemon_detail/views/bouncing_ball.dart';
 import 'package:github_app/ui/views/gap.dart';
 import 'package:github_app/ui/views/header_view.dart';
@@ -36,7 +39,6 @@ class PokemonDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: GetBuilder<PokemonController>(
           initState: (controller) {
@@ -77,43 +79,47 @@ class PokemonDetailPage extends StatelessWidget {
                       height: 80,
                     ),
                     const Gap.verti(16),
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(16),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ..._itemView(
-                            text: "Ability",
-                            children: [
-                              ...(item.pokemonDetail?.abilities ?? []).map(
-                                (e) => _type(
-                                  text: e.ability?.name,
-                                  color: Colors.blue,
-                                ),
-                              )
-                            ],
+                    GetBuilder<ThemeController>(builder: (controller) {
+                      return Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: controller.isDarkMode
+                              ? Colors.black
+                              : Colors.white,
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(16),
                           ),
-                          const Gap.verti(16),
-                          ..._itemView(
-                            text: "Moves",
-                            children: [
-                              ...(item.pokemonDetail?.moves ?? []).map(
-                                (e) => _type(
-                                  text: e.move?.name,
-                                  color: Colors.blue,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ..._itemView(
+                              text: "Ability",
+                              children: [
+                                ...(item.pokemonDetail?.abilities ?? []).map(
+                                  (e) => _type(
+                                    text: e.ability?.name,
+                                    color: Colors.blue,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const Gap.verti(16),
+                            ..._itemView(
+                              text: "Moves",
+                              children: [
+                                ...(item.pokemonDetail?.moves ?? []).map(
+                                  (e) => _type(
+                                    text: e.move?.name,
+                                    color: Colors.blue,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    })
                   ],
                 ),
                 Align(
@@ -121,10 +127,13 @@ class PokemonDetailPage extends StatelessWidget {
                   child: TouchOpacity(
                     onTap: () {
                       controller.catchPokemon(
-                          pokemon: item,
-                          onError: (error) {
-                            Helper.func.showSnackbar(context, error);
-                          });
+                        onError: (error) {
+                          Helper.func.showSnackbar(context, error);
+                        },
+                        onSuccess: () {
+                          _showModal(context, item, controller);
+                        },
+                      );
                     },
                     child: BouncingBall(
                       child: Image.network(
@@ -178,5 +187,57 @@ class PokemonDetailPage extends StatelessWidget {
         children: children,
       )
     ];
+  }
+
+  void _showModal(
+      BuildContext context, Pokemon item, PokemonController controller) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        String username = "";
+        return StatefulBuilder(
+          builder: (context, setLocalState) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Gotcha",
+                      style: T.text.h1,
+                    ),
+                    const Gap.verti(16),
+                    Text("Now enter your ${item.name} nickname"),
+                    const Gap.verti(16),
+                    TextField(
+                      onChanged: (val) {
+                        setLocalState(() => username = val);
+                      },
+                    ),
+                    const Gap.verti(16),
+                    ElevatedButton(
+                        onPressed: username.isEmpty
+                            ? null
+                            : () {
+                                controller.addPokemon(
+                                  pokebag: Pokebag(
+                                      pokemon: item, username: username),
+                                );
+                                Get.back();
+                              },
+                        child: const Text("Save"))
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

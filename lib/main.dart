@@ -7,10 +7,11 @@ import 'package:github_app/getx/theme_controller.dart';
 import 'package:github_app/ui/pokemon/pokemon_page.dart';
 
 void main() async {
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => const MyApp(),
-  ));
+  // runApp(DevicePreview(
+  //   enabled: !kReleaseMode,
+  //   builder: (context) => const MyApp(),
+  // ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
+      themeMode: ThemeMode.light,
       home: const PokemonPage(),
     );
   }
