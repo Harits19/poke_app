@@ -2,7 +2,7 @@
 
 This is project for following the recrutment process using API from https://pokeapi.co/docs/v2
 
-# Teknologi
+# Technology
 
 - [**device_preview**](https://pub.dev/packages/device_preview)
 - [**dio**](https://pub.dev/packages/dio)
@@ -11,4 +11,4 @@ This is project for following the recrutment process using API from https://poke
 
 # Demo
 
-![enter image description here](https://github.com/Harits19/poke_app/blob/main/demo/demo.gif?raw=true)
+![Demo](https://github.com/Harits19/poke_app/blob/main/demo/demo.gif?raw=true)
