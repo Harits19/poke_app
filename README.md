@@ -1,6 +1,6 @@
 # Pokemon App
 
-Ini adalah proyek untuk mengikuti proses rekrutmen menggunakan API dari https://pokeapi.co/docs/v2
+This is project for following the recrutment process using API from https://pokeapi.co/docs/v2
 
 # Teknologi
 
